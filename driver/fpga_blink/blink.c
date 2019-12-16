@@ -68,8 +68,8 @@ static const int __irq_porc_num = ARRAY_SIZE(__irq_vic);
 static int _probe(struct platform_device *pdev) {
 	int ret = 0, irq, i, irq_num;
 	struct blink *fb;
-    struct resource *r_mem; /* IO mem resources */
-    struct device *dev = &pdev->dev;
+	struct resource *r_mem; /* IO mem resources */
+	struct device *dev = &pdev->dev;
 
 	dev_info(dev, "probe\r\n");
 
