@@ -14,6 +14,7 @@
 #include <linux/of_device.h>
 #include <linux/of_platform.h>
 
+#include "irq.h"
 
 struct blink {
 	void __iomem *reg;
@@ -37,15 +38,8 @@ MODULE_DEVICE_TABLE(of, __of_match);
 static struct cdev __cdev;
 static dev_t __devno; /* device number */
 
-static irqreturn_t _irq_image_cache_done(int irq, void *dev_id) {
-	irqreturn_t ret = IRQ_HANDLED;
-	struct fpga_blink *fb = (struct fpga_blink *)dev_id;
-	printk("IRQ-> %d @%p\r\n", irq, fb);
-	return ret;
-}
-
 static const irq_proc_t __irq_vic[] = {
-	{_irq_image_cache_done, NULL , "IMAGE_CACHE_DONE_INT"},	/* 61 */
+	{irq_image_cache_done, irq_th_image_cache_done , "IMAGE_CACHE_DONE_INT"},	/* 61 */
 	{NULL, NULL, "LVDS_ALL_BITSLIP_DONE"},	/* 62 */
 	{NULL, NULL, "ERROR_INT"},	/* 63 */
 	{NULL, NULL, "JPEG_DONE_INT"},	/* 64 */
