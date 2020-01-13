@@ -1,6 +1,6 @@
 #!/bin/bash
-SUBS="include jpeg Makefile"
-DIST_DIR=/home/lay/datadisk/sources/fw_prague/kernel/fpga
+SUBS="include jpeg peak Makefile"
+DIST_DIR=$1/fpga
 
 for i in ${SUBS}
 do

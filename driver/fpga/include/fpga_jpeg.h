@@ -15,54 +15,62 @@
 
 #include <linux/ioctl.h>
 
-enum quantization_type {
-	e_quantization_type_pl = 0,
-	e_quantization_type_pc,
-	e_quantization_type_sl,
-	e_quantization_type_sc
+enum QUANTIZATION_TYPE
+{
+    N_QUANTIZATION_TYPE_PL = 0,
+    N_QUANTIZATION_TYPE_PC,
+    N_QUANTIZATION_TYPE_SL,
+    N_QUANTIZATION_TYPE_SC
 };
 
-enum je_result_status {
-	e_je_result_status_succeed = 0,
-	e_je_result_status_timeout,
-	e_je_result_status_invalid_param,
-	e_je_result_status_error
+enum JPEG_ENCODE_RESULT
+{
+    N_JPEG_ENCODE_RESULT_SUCCEED = 0,
+    N_JPEG_ENCODE_RESULT_TIMEOUT,
+    N_JPEG_ENCODE_RESULT_INVALID_PARAM,
+    N_JPEG_ENCODE_RESULT_ERROR
 };
 
-enum je_type {
-	e_je_type_p = 0,
-	e_je_type_s,
+enum JPEG_ENCODE_TYPE
+{
+    N_JPEG_ENCODE_TYPE_P = 0,
+    N_JPEG_ENCODE_TYPE_S,
 };
 
-struct quantization {
-	enum quantization_type type;
-	unsigned long data[64];
+struct QUANTIZATION
+{
+    enum QUANTIZATION_TYPE type;
+    unsigned int data[64];
 };
 
-struct je_raw_image_addr_rgb {
-	unsigned long r;
-	unsigned long g;
-	unsigned long b;
+struct JPEG_ENCODE_RGB_RAW_IMG_ADDR
+{
+    unsigned int r;
+    unsigned int g;
+    unsigned int b;
 };
 
-union je_raw_image_addr {
-	struct je_raw_image_addr_rgb shade;
-	unsigned long pattern;
+union JPEG_ENCODE_RAW_IMG_ADDR
+{
+    struct JPEG_ENCODE_RGB_RAW_IMG_ADDR shade;
+    unsigned int pattern;
 };
 
-struct je_parameter {
-	enum je_type type;
-	union je_raw_image_addr raw_image_addr;
-	unsigned long jpeg_addr;
+struct JPEG_ENCODE_PARAM
+{
+    enum JPEG_ENCODE_TYPE type;
+    union JPEG_ENCODE_RAW_IMG_ADDR raw_image_addr;
+    unsigned int jpeg_addr;
 };
 
-struct je_result {
-	enum je_result_status status;
-	unsigned long size;
+struct JPEG_ENCODE_RESULT_DATA
+{
+    enum JPEG_ENCODE_RESULT status;
+    unsigned int size;
 };
 
 #define IOC_MAGIC					'c'
 
-#define IOC_SET_JPEG_QUANTIZATION	_IOW(IOC_MAGIC, 0, struct quantization *)
-#define IOC_DO_JPEG_ENCODE			_IOW(IOC_MAGIC, 1, struct je_parameter *)
+#define IOC_SET_JPEG_QUANTIZATION	_IOW(IOC_MAGIC, 0, struct QUANTIZATION *)
+#define IOC_DO_JPEG_ENCODE			_IOW(IOC_MAGIC, 1, struct JPEG_ENCODE_PARAM *)
 #endif /* SRC_JPEG_FPGA_JPEG_H_ */
