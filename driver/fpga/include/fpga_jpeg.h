@@ -48,6 +48,7 @@ struct JPEG_ENCODE_RGB_RAW_IMG_ADDR
     unsigned int r;
     unsigned int g;
     unsigned int b;
+    unsigned int o;
 };
 
 union JPEG_ENCODE_RAW_IMG_ADDR

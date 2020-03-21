@@ -18,7 +18,7 @@
 
 #include "../include/fpga_jpeg.h"
 
-#define VERSION                         "0.0.0.1"
+#define VERSION                         "0.0.0.2"
 
 // jpeg reg group
 #define REG_JPEG_CTRL                   0x0000
@@ -28,6 +28,7 @@
 #define REG_JPEG_R_ADDR                 0x0008
 #define REG_JPEG_G_ADDR                 0x000c
 #define REG_JPEG_B_ADDR                 0x0010
+#define REG_JPEG_O_ADDR                 0x0050
 
 #define REG_JPEG_P_ADDR                 0x0014
 
@@ -111,6 +112,7 @@ static int _pl_do_encode(void __iomem *reg_base,
         break;
     case N_JPEG_ENCODE_TYPE_S:
         ctl |= (1ul << 1);
+        writel(param->raw_image_addr.shade.o, reg_base + REG_JPEG_O_ADDR);
         writel(param->raw_image_addr.shade.r, reg_base + REG_JPEG_R_ADDR);
         writel(param->raw_image_addr.shade.g, reg_base + REG_JPEG_G_ADDR);
         writel(param->raw_image_addr.shade.b, reg_base + REG_JPEG_B_ADDR);
