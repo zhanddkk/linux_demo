@@ -1,4 +1,4 @@
-KNLNEL_ROOT ?= /datadisk/lay/sources/prague/fw_prague/kernel/linux-xlnx
+KNLNEL_ROOT ?= /datadisk/user/lay/sources/prague/fw_prague/kernel/linux-xlnx
 CROSS_COMPILE ?= arm-linux-
 ARCH ?= arm
 PROJ_PATH ?= $(shell pwd)
